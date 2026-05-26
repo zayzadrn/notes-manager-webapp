@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Note</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main">
+
+    <section class="card">
+
+        <h1>✏️ Edit Note</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="tag"
+                value="{{ note.tag }}"
+            >
+
+            <textarea name="note">{{ note.text }}</textarea>
+
+            <button class="primary-btn" type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/">⬅ Back Home</a>
+
+    </section>
+
+</div>
+
+</body>
+</html>

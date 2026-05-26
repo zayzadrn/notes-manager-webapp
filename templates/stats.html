@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main">
+
+    <section class="card">
+        <h1>📊 Stats</h1>
+
+        <p>Total Notes: {{ note_count }}</p>
+        <p>Total Words: {{ word_count }}</p>
+        <p>Average Words per Note: {{ average }}</p>
+
+        <br>
+        <a href="/">⬅ Back Home</a>
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tags</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main">
+
+    <section class="card">
+        <h1>🏷 Tags</h1>
+
+        {% for tag, notes in grouped_notes.items() %}
+
+            <h2>{{ tag }}</h2>
+
+            {% for note in notes %}
+                <div class="note">
+                    {{ note.text }}
+                </div>
+            {% endfor %}
+
+        {% endfor %}
+
+        <br>
+        <a href="/">⬅ Back Home</a>
+    </section>
+
+</div>
+
+</body>
+</html>

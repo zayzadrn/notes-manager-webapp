@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Notes Manager</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h1>📝 Notes</h1>
+
+        <a href="/">🏠 Dashboard</a>
+        <a href="/stats">📊 Stats</a>
+        <a href="/tags">🏷 Tags</a>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <h1>Notes Manager</h1>
+
+            <p>
+                Organize notes, search ideas, manage tags,
+                and keep everything in one place.
+            </p>
+
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="card">
+
+            <h2>📊 Summary</h2>
+
+            <div class="stats">
+
+                <div class="stat-box">
+                    <h2>{{ note_count }}</h2>
+                    <p>Total Notes</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>{{ word_count }}</h2>
+                    <p>Total Words</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ADD NOTE -->
+        <section class="card">
+
+            <h2>➕ Add a Note</h2>
+
+            <form action="/add" method="post">
+
+                <input
+                    type="text"
+                    name="tag"
+                    placeholder="Tag e.g. work, school, idea"
+                >
+
+                <textarea
+                    name="note"
+                    placeholder="Write your note here..."
+                ></textarea>
+
+                <button class="primary-btn" type="submit">
+                    Add Note
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- SEARCH -->
+        <section class="card">
+
+            <h2>🔎 Search Notes</h2>
+
+            <form action="/" method="get">
+
+                <div class="search-row">
+
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search keyword"
+                        value="{{ search }}"
+                    >
+
+                    <input
+                        type="text"
+                        name="tag"
+                        placeholder="Filter by tag"
+                        value="{{ tag }}"
+                    >
+
+                    <button class="primary-btn" type="submit">
+                        Search
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- NOTES -->
+        <section class="card">
+
+            <h2>📌 Your Notes</h2>
+
+            {% if notes %}
+
+                {% for note in notes %}
+
+                    <div class="note">
+
+                        <span class="tag">
+                            {{ note.tag }}
+                        </span>
+
+                        <p>
+                            {{ note.highlighted_text }}
+                        </p>
+
+                        <div class="actions">
+
+                            <form action="/edit/{{ note.index }}" method="get">
+                                <button class="edit-btn" type="submit">
+                                    Edit
+                                </button>
+                            </form>
+
+                            <form action="/delete/{{ note.index }}" method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this note?');">
+
+                                <button class="delete-btn" type="submit">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+                    <h3>No notes found yet.</h3>
+                    <p>Add your first note above.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
